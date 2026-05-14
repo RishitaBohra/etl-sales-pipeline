@@ -1,5 +1,6 @@
 import pandas as pd
 import logging
+from sqlalchemy import create_engine
 
 # =========================
 # LOGGING SETUP
@@ -52,7 +53,7 @@ try:
 
     logging.info("Data transformed successfully")
 
-    # Generate region-wise sales summary
+    # Generate sales summary
     summary = df.groupby("Region")["TotalSales"].sum().reset_index()
 
     print("\nSales Summary By Region:")
@@ -62,6 +63,33 @@ try:
     summary.to_csv("output/sales_summary.csv", index=False)
 
     logging.info("Summary report generated")
+
+    # =========================
+    # LOAD TO MYSQL
+    # =========================
+
+    print("\n[3] Loading Data into MySQL...")
+
+    username = "root"
+    password = "ganeshji:)123"
+    host = "localhost"
+    database = "salesdb"
+
+    engine = create_engine(
+        f"mysql+pymysql://{username}:{password}@{host}/{database}"
+    )
+
+    # Load table into MySQL
+    df.to_sql(
+        name="sales_data",
+        con=engine,
+        if_exists="replace",
+        index=False
+    )
+
+    print("\nData loaded into MySQL successfully!")
+
+    logging.info("Data loaded into MySQL successfully")
 
     print("\nETL PROCESS COMPLETED SUCCESSFULLY")
     print("=" * 50)

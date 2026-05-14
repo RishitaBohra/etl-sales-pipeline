@@ -1,0 +1,11 @@
+OrderID,Product,Category,Price,Quantity,Region
+1001,Laptop,Electronics,55000,2,North
+1002,Phone,Electronics,30000,1,South
+1003,Headphones,Accessories,2000,3,West
+1004,Monitor,Electronics,12000,2,East
+1005,Keyboard,Accessories,1500,4,North
+1006,Mouse,Accessories,800,5,South
+1007,Tablet,Electronics,25000,1,West
+1008,Printer,Electronics,10000,2,East
+1009,Speaker,Accessories,3500,2,North
+1010,Camera,Electronics,45000,1,South

@@ -73,8 +73,6 @@ etl-sales-pipeline/
 
 ---
 
-## 📊 Additional SQL Output
-![SQL Output](screenshots/sqltable copy.png)
 
 ---
 

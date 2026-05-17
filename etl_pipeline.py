@@ -1,6 +1,7 @@
 import pandas as pd
 import logging
 from sqlalchemy import create_engine
+from getpass import getpass
 
 # =========================
 # LOGGING SETUP
@@ -26,12 +27,17 @@ try:
 
     print("\n[1] Extracting Data...")
 
+    # Read CSV dataset
     df = pd.read_csv("data/sales_data.csv")
+
+    # Validate dataset
+    if df.empty:
+        raise Exception("Dataset is empty")
 
     print("\nOriginal Dataset:")
     print(df)
 
-    logging.info("Data extracted successfully")
+    logging.info(f"Data extracted successfully | Records: {len(df)}")
 
     # =========================
     # TRANSFORM
@@ -39,7 +45,7 @@ try:
 
     print("\n[2] Transforming Data...")
 
-    # Remove duplicates
+    # Remove duplicate rows
     df = df.drop_duplicates()
 
     # Remove missing values
@@ -53,33 +59,40 @@ try:
 
     logging.info("Data transformed successfully")
 
-    # Generate sales summary
+    # =========================
+    # ANALYTICS
+    # =========================
+
+    print("\n[3] Generating Sales Summary...")
+
+    # Region-wise sales summary
     summary = df.groupby("Region")["TotalSales"].sum().reset_index()
 
     print("\nSales Summary By Region:")
     print(summary)
 
-    # Save summary CSV
+    # Export summary report
     summary.to_csv("output/sales_summary.csv", index=False)
 
-    logging.info("Summary report generated")
+    logging.info("Summary report generated successfully")
 
     # =========================
     # LOAD TO MYSQL
     # =========================
 
-    print("\n[3] Loading Data into MySQL...")
+    print("\n[4] Loading Data into MySQL...")
 
     username = "root"
-    password = "ganeshji:)123"
+    password = getpass("Enter MySQL Password: ")
     host = "localhost"
     database = "salesdb"
 
+    # Create MySQL connection
     engine = create_engine(
         f"mysql+pymysql://{username}:{password}@{host}/{database}"
     )
 
-    # Load table into MySQL
+    # Load transformed data into MySQL
     df.to_sql(
         name="sales_data",
         con=engine,
@@ -94,7 +107,7 @@ try:
     print("\nETL PROCESS COMPLETED SUCCESSFULLY")
     print("=" * 50)
 
-    logging.info("ETL Pipeline Completed")
+    logging.info("ETL Pipeline Completed Successfully")
 
 except Exception as e:
 

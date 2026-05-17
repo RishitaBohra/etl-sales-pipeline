@@ -15,3 +15,14 @@
 2026-05-15 00:57:25,104 - INFO - Summary report generated
 2026-05-15 00:57:25,151 - INFO - Data loaded into MySQL successfully
 2026-05-15 00:57:25,151 - INFO - ETL Pipeline Completed
+2026-05-17 12:17:57,676 - INFO - ETL Pipeline Started
+2026-05-17 12:17:57,685 - INFO - Data extracted successfully | Records: 10
+2026-05-17 12:17:57,691 - INFO - Data transformed successfully
+2026-05-17 12:17:57,694 - INFO - Summary report generated successfully
+2026-05-17 12:18:04,988 - ERROR - Error occurred: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+2026-05-17 12:18:31,687 - INFO - ETL Pipeline Started
+2026-05-17 12:18:31,693 - INFO - Data extracted successfully | Records: 10
+2026-05-17 12:18:31,700 - INFO - Data transformed successfully
+2026-05-17 12:18:31,703 - INFO - Summary report generated successfully
+2026-05-17 12:18:37,559 - INFO - Data loaded into MySQL successfully
+2026-05-17 12:18:37,559 - INFO - ETL Pipeline Completed Successfully
